@@ -4,7 +4,7 @@ const list = document.getElementById("list");
 
 const getData = async() =>{
     try{
-        const res = await fetch(`http://localhost:8000/api/users`,{
+        const res = await fetch(`http://localhost:8000/api/posts`,{
             method:"GET"
         });
         const data = await res.json();
@@ -61,5 +61,5 @@ const getUserById = async() =>{
 }
 // getData()
 fetchData.addEventListener("click", async ()=>{
-    await getUserById();
+    await getData();
 })

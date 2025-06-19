@@ -2,7 +2,9 @@
 use FastRoute\RouteCollector;
 use Rakit\Validation\Validator;
 use Model\Post;
+use Src\Controller\Post_controller;
 require_once __DIR__ . '/../../models/Post.model.php';
+require_once __DIR__ . '/../controller/Post.controller.php';
 
 
 // Instantiate the User model
@@ -16,24 +18,7 @@ return function(RouteCollector $r) {
         exit;
     }
     // User Routes
-    $r->addRoute('GET', '/api/posts', function() use ($postModel){
-        header('Content-Type: application/json');
-
-        $posts = $postModel->getAllPosts();
-
-        if(count($posts) > 0){ 
-            echo json_encode([
-            "message" => "No Posts are there",
-            "status" => false
-        ]);
-        }
-
-        echo json_encode([
-            "message" => "No Posts are there",
-            "data" => $posts,
-            "status" => true
-        ]);
-    });
+    $r->addRoute('GET', '/api/posts', [Post_controller::class,'getPosts']);
 
     $r->addRoute('POST', "/api/post/create", function() use ($postModel) {
         $json = file_get_contents('php://input');

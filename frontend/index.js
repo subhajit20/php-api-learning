@@ -4,22 +4,22 @@ const list = document.getElementById("list");
 
 const getData = async() =>{
     try{
-        const res = await fetch(`http://localhost:8000/`,{
+        const res = await fetch(`http://localhost:8000/api/users`,{
             method:"GET"
         });
         const data = await res.json();
 
         console.log(data);
 
-        // let lt = ``
-        // if(data.status === "success"){
-        //     data.data.map((dt)=>{
-        //         console.log(dt.username);
-        //         lt += `<li>${dt.username}</li>`
-        //     });
+        let lt = ``
+        if(data.users.length > 0){
+            data.users.map((dt)=>{
+                console.log(dt.username);
+                lt += `<li style="padding:5px">${dt.username}</li>`
+            });
 
-        //     list.innerHTML = lt;
-        // }
+            list.innerHTML = lt;
+        }
     }
     catch(e){
         console.log(e);
@@ -29,13 +29,10 @@ const getData = async() =>{
 const createData = async() =>{
     // console.log(username.value)
     try{
-        const res = await fetch(`http://localhost:8000/api/create`,{
+        const res = await fetch(`http://localhost:8000/api/register`,{
             method:"POST",
-            headers:{
-                'content-type':"application/json"
-            },
             body:JSON.stringify({
-                name: username.value,
+                username: username.value,
                 roll: 1
             })
         });
@@ -47,7 +44,22 @@ const createData = async() =>{
         console.log(e);
     }
 }
+
+const getUserById = async() =>{
+    // console.log(username.value)
+    try{
+        const res = await fetch(`http://localhost:8000/api/user?id=7`,{
+            method:"GET"
+        });
+        const data = await res.json();
+
+        console.log(data);
+    }
+    catch(e){
+        console.log(e);
+    }
+}
 // getData()
 fetchData.addEventListener("click", async ()=>{
-    await getData()
+    await getUserById();
 })

@@ -12,8 +12,10 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 // Create dispatcher
 $dispatcher = FastRoute\simpleDispatcher(function(RouteCollector $r) {
-    $routes = require __DIR__ . '/../src/routes/routes.php';
-    $routes($r);
+    $user_routes = require __DIR__ . '/../src/routes/routes.php';
+    $post_routes = require __DIR__ . '/../src/routes/post.routes.php';
+    $user_routes($r);
+    $post_routes($r);
 });
 
 // Fetch method and URI from somewhere

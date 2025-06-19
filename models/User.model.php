@@ -1,29 +1,39 @@
 <?php
 
 namespace Model;
+
 use Config\Database;
 use PDO;
 
 class User {
-    protected $db;
+    protected PDO $db;
 
     public function __construct()
     {
         $this->db = Database::connect();
     }
 
-    public function getAllUsers() {
-        $stmt = $this->db->query("SELECT * FROM user"); // assuming "posts" table
+    public function getAllUsers(): array
+    {
+        $stmt = $this->db->query("SELECT * FROM user");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function findById($id) {
-        $db = Database::connect(); // must create a DB instance in static methods
-        $stmt = $db->prepare("SELECT * FROM user WHERE id = :id");
+    public function registerUser(string $username): void
+    {
+        $stmt = $this->db->prepare("INSERT INTO user (username) VALUES (:username)");
+        $stmt->execute([
+            ':username' => $username
+        ]);
+    }
+
+    public function findById(int $id): ?array
+    {
+        $stmt = $this->db->prepare("SELECT * FROM user WHERE id = :id");
         $stmt->execute([
             ':id' => $id
         ]);
 
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 }

@@ -48,7 +48,7 @@ const createData = async() =>{
 const getUserById = async() =>{
     // console.log(username.value)
     try{
-        const res = await fetch(`http://localhost:8000/api/user?id=7`,{
+        const res = await fetch(`http://localhost:8000/api/user?userid=11`,{
             method:"GET"
         });
         const data = await res.json();

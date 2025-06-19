@@ -4,7 +4,7 @@ namespace Src\Controller;
 use Rakit\Validation\Validator;
 use Model\User;
 
-$usermodel = new User();
+// $usermodel = new User();
 
 class User_controller{
     protected User $userModel;

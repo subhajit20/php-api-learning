@@ -14,10 +14,10 @@ class Post {
     }
 
     public function createPost($userid, $postdata){
-        $stmt = $this->db->prepare("INSERT INTO todo (data, owner) value (:data, owner)");
+        $stmt = $this->db->prepare("INSERT INTO todo (data, owner) value (:postdata, :ownerid)");
         $stmt->execute([
-            ":data" => $postdata,
-            ":owner" => $userid
+            ":postdata" => $postdata,
+            ":ownerid" => $userid
         ]);
     }
 

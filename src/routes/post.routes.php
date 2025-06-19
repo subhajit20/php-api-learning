@@ -27,10 +27,10 @@ return function(RouteCollector $r) {
 
         error_log("Reuqest Body ---------> " . print_r($data, true));
 
-        // creating validation chain
+        // // creating validation chain
         $validation = $validator->make($data, [
-            'username' => 'required|alpha_num|min:3|max:20',
-            // 'password' => 'required|alpha_num|min:3|max:20',
+            'userid' => 'required|numeric|min:1|max:20',
+            "postdata" => 'required|min:3|max:200',
         ]);
         $validation->validate();
 
@@ -49,7 +49,7 @@ return function(RouteCollector $r) {
         $postModel->createPost($data["userid"], $data["postdata"]);
 
         echo json_encode([
-            "message" => "New User created succesfully",
+            "message" => "New Post created succesfully",
             "status" => true
         ]);
     });

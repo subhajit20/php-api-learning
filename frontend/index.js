@@ -4,7 +4,7 @@ const list = document.getElementById("list");
 
 const getData = async() =>{
     try{
-        const res = await fetch(`http://localhost:8000/api/posts`,{
+        const res = await fetch(`http://localhost:8000/api/users`,{
             method:"GET"
         });
         const data = await res.json();
@@ -12,8 +12,8 @@ const getData = async() =>{
         console.log(data);
 
         let lt = ``
-        if(data.users.length > 0){
-            data.users.map((dt)=>{
+        if(data.data.length > 0){
+            data.data.map((dt)=>{
                 console.log(dt.username);
                 lt += `<li style="padding:5px">${dt.username}</li>`
             });

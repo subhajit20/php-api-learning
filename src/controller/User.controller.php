@@ -28,7 +28,8 @@ class User_controller{
         } catch (\Exception $e) {
             http_response_code(500);
             echo json_encode([
-                "error" => "Failed to fetch users"
+                "error" => "Failed to fetch users",
+                "message" => $e->getMessage()
             ]);
         }
     }

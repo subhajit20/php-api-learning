@@ -11,10 +11,10 @@ class Database {
     public static function connect(): PDO {
         if (self::$connection === null) {
             try {
-                $host = 'localhost';
-                $db   = 'test';
+                $host = '127.0.0.1';
+                $db   = 'testdb';
                 $user = 'root';
-                $pass = '';
+                $pass = 'mysql@2025';
                 $charset = 'utf8mb4';
 
                 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";

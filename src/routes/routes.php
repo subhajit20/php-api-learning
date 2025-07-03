@@ -17,4 +17,11 @@ return function(RouteCollector $r) {
 
     $r->addRoute('GET', "/api/user", [User_controller::class,"findUserById"]);
 
+
+    $r->addRoute('GET', "/", function() {
+        echo json_encode([
+            "message" => "Welcome to the API!"
+        ]);
+    });
+
 };

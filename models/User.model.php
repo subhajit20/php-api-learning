@@ -11,6 +11,11 @@ class User {
     public function __construct()
     {
         $this->db = Database::connect();
+        $this->db->query("CREATE TABLE IF NOT EXISTS user (
+            id VARCHAR(50) NOT NULL PRIMARY KEY DEFAULT (UUID()),
+            username VARCHAR(50) NOT NULL UNIQUE,
+            password VARCHAR(255) NOT NULL
+        )");
     }
 
     public function getAllUsers(): array
@@ -27,7 +32,7 @@ class User {
         ]);
     }
 
-    public function findById(int $id): ?array
+    public function findById(string $id): ?array
     {
         $stmt = $this->db->prepare("SELECT * FROM user WHERE id = :id");
         $stmt->execute([
